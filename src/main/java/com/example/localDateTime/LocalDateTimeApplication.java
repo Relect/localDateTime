@@ -6,19 +6,23 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 @SpringBootApplication
 public class LocalDateTimeApplication {
 
 	public static void main(String[] args) throws JsonProcessingException {
-		SpringApplication.run(LocalDateTimeApplication.class, args);
+		ApplicationContext context = SpringApplication.run(LocalDateTimeApplication.class, args);
+		ObjectMapper mapper = context.getBean(ObjectMapper.class);
+
 		Example example = new Example();
-		example.setTime(LocalDateTime.now());
-		ObjectMapper om = new ObjectMapper();
-		om.registerModule(new JavaTimeModule()).configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-		String str = om.writeValueAsString(example.getTime());
+		LocalDateTime time = LocalDateTime.now(ZoneOffset.of("+4"));
+		example.setTime(time);
+		String str = mapper.writeValueAsString(example.getTime());
 		System.out.println(str);
 	}
 
