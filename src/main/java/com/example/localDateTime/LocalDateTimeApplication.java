@@ -22,7 +22,8 @@ public class LocalDateTimeApplication {
 		Example example = new Example();
 		LocalDateTime time = LocalDateTime.now(ZoneOffset.of("+4"));
 		example.setTime(time);
-		String str = mapper.writeValueAsString(example.getTime());
+		example.setTime2(time);
+		String str = mapper.writeValueAsString(example);
 		System.out.println(str);
 	}
 
