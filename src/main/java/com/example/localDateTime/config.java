@@ -14,15 +14,9 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class config {
 
-    public static final String DATETIME_FORMAT = "yyyy:MM:dd'##'HH:mm:ss:SSS";
-    public static LocalDateTimeSerializer LOCAL_DATETIME_SERIALIZER =
-            new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-
-
     @Bean
     public ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
-        module.addSerializer(LOCAL_DATETIME_SERIALIZER);
         return new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .registerModule(module);

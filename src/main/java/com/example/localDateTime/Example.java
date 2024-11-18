@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 public class Example {
 
-    //@JsonFormat(pattern = "yyyy:MM:dd'###'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy:MM:dd'##'HH:mm:ss.SSS")
     private LocalDateTime time;
+    @JsonFormat(pattern = "yyyy:MM:dd'##'HH")
     private LocalDateTime time2;
 }
